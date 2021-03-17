@@ -1,0 +1,14 @@
+body{
+    background-color: #efefef !important;
+}
+.breadcrumb li:focus {
+  outline: transparent auto 0px !important;
+}
+.breadcrumb li {
+  cursor: pointer !important;
+}
+.form-floating p{
+  font-size: .8rem;
+  margin: 0;
+  padding: 0;
+}

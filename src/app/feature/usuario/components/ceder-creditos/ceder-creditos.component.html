@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="card">
+    <div class="card-header bg-dark text-white">
+      Ceder creditos
+    </div>
+    <div class="card-body">
+
+      <form class="row" [formGroup]="cederForm" (ngSubmit)="form_Cre_Act()">
+        <div class="form-floating mb-1 col-6">
+          <label for="floatingInput" >Usuario donador</label>
+          <select class="form-select form-control" formControlName="id" ng-options="atribute for atribute in users">
+            <option *ngFor="let user of this.usuario | async" value="{{user.id}}" >{{user.cedula}} - {{user.nombre}}</option>
+          </select>
+          <div *ngIf="validarFormUsuario('id')">
+            <p *ngIf="this.cederForm.controls['id'].errors?.required" class="text-danger fs-6">El usuario donador es requerido</p>
+          </div>
+
+        </div>
+
+        <div class="form-floating mb-1 col-6">
+          <label>Usuario a ceder</label>
+          <select class="form-select form-control" (change) = "validarSelecionado()"  formControlName="cedido">
+            <option *ngFor="let user of this.listaUsuarios| async" value="{{user.id}}" >{{user.cedula}} - {{user.nombre}}</option>
+          </select>
+          <div *ngIf="validarFormUsuario('cedido')">
+            <p *ngIf="this.cederForm.controls['cedido'].errors?.required" class="text-danger fs-6">El usuario a ceder es requerido</p>
+          </div>
+        </div>
+
+        <div class="form-floating mb-1 col">
+          <label for="basic-url" class="form-label">Creditos a ceder</label>
+          <input type="number" class="form-control" max="{{this.maxCreditos}}" id="creditos" min="1" aria-label="valor" formControlName="creditos">
+          <div *ngIf="validarFormUsuario('creditos')">
+            <p *ngIf="this.cederForm.controls['creditos'].errors?.required" class="text-danger fs-6">Los creditos son requerido</p>
+          </div>
+        </div>
+
+        <div class="col-12 mt-2">
+          <button type="submit" [disabled]="this.cederForm.invalid" class="btn btn-primary">Ceder <i class="fas fa-coins"></i></button>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="card">
+    <div id="tituloCard" class="card-header bg-dark text-white">
+      {{formulario}} usuario
+    </div>
+    <div class="card-body">
+
+      <form class="row" [formGroup]="usuarioForm" (ngSubmit)="form_Cre_Act()">
+
+        <div class="form-floating mb-1 col-6">
+          <label for="floatingInput" >Nombre</label>
+          <input type="text" class="form-control" placeholder="..." id="nombre" formControlName="nombre">
+          <div *ngIf="validarFormUsuario('nombre')">
+            <p *ngIf="this.usuarioForm.controls['nombre'].errors?.required" class="text-danger fs-6">El nombre es requerido</p>
+            <p *ngIf="this.usuarioForm.controls['nombre'].errors?.minlength" class="text-danger fs-6">El nombre debe tener mínimo 3 caracteres</p>
+            <p *ngIf="this.usuarioForm.controls['nombre'].errors?.maxlength" class="text-danger fs-6">El nombre debe tener máximo 50 caracteres</p>
+            <p *ngIf="this.usuarioForm.controls['nombre'].errors?.pattern" class="text-danger fs-6">El nombre no debe tener caracteres especiales o numericos</p>
+          </div>
+        </div>
+
+
+
+        <div class="form-floating mb-1 col-6">
+          <label>Cedula</label>
+          <input type="text" class="form-control" placeholder="..."  id="cedula" formControlName="cedula">
+          <div *ngIf="validarFormUsuario('cedula')">
+            <p *ngIf="this.usuarioForm.controls['cedula'].errors?.required" class="text-danger fs-6">La cedula es requerida</p>
+            <p *ngIf="this.usuarioForm.controls['cedula'].errors?.minlength" class="text-danger fs-6">La cedula debe tener mínimo 3 caracteres</p>
+            <p *ngIf="this.usuarioForm.controls['cedula'].errors?.maxlength" class="text-danger fs-6">La cedula debe tener máximo 10 caracteres</p>
+            <p *ngIf="this.usuarioForm.controls['cedula'].errors?.pattern" class="text-danger fs-6">La cedula debe ser numerica</p>
+          </div>
+        </div>
+
+
+        <div class="form-floating mb-1 col">
+          <label for="basic-url" class="form-label">Fecha de nacimiento</label>
+          <input type="date" class="form-control"  min="1900-01-01" max="{{maxFecha | date:'yyyy-MM-dd'}}" id="fechaNacimiento" formControlName="fechaNacimiento">
+          <div *ngIf="validarFormUsuario('fechaNacimiento')">
+            <p *ngIf="this.usuarioForm.controls['fechaNacimiento'].errors?.required" class="text-danger fs-6">La fecha es requerida</p>
+          </div>
+        </div>
+
+        <div class="col-12 mt-2">
+          <button type="submit" id="guardarUsuario" [disabled]="this.usuarioForm.invalid" class="btn btn-primary">Guardar <i class="fas fa-user-check"></i></button>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+</div>

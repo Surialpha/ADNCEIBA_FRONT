@@ -1,0 +1,39 @@
+<div class="container">
+  <div id="inscripciones">
+    <div class="card" style="width: 100%">
+      <div class="card-body p-0">
+        <table class="table inscripciones table-striped table-bordered">
+          <thead class="table-dark">
+            <tr>
+              <th scope="col">Usuario</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Curso</th>
+              <th scope="col">Valor curso</th>
+              <th scope="col">Fecha de inscripcion</th>
+              <th scope="col">Creditos disponibles</th>
+              <th scope="col">Opciones</th>
+            </tr>
+          </thead>
+          <tbody id="bodyTable">
+            <tr
+              *ngFor="let item of this.ListaInscriociones | async"
+              id="tr-{{ item.id }}"
+            >
+              <td scope="row">{{ item.usuario }}</td>
+              <td>{{ item.nombre }}</td>
+              <td *ngIf="item.curso == 1">Matematicas</td>
+              <td *ngIf="item.curso == 2">Cocina</td>
+              <td *ngIf="item.curso == 3">Lectura</td>
+              <td>{{ item.valor }}</td>
+              <td>{{ item.fechaInscripcion | date }}</td>
+              <td>{{ item.creditos }}</td>
+              <td>
+                <button data-bs-toggle="tooltip" data-bs-placement="top" title="Eliminar" class="btn btn-danger mx-1" (click)="eliminar(item.id)"><i class="fas fa-book"></i></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

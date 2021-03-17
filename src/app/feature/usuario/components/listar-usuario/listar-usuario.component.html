@@ -1,0 +1,39 @@
+<div class="container">
+  <div id="usuarios" >
+
+    <div class="card" style="width:100%">
+      <div class="card-body p-0">
+        <table class="table usuarios table-striped table-bordered">
+          <thead class="table-dark">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Cedula</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Creditos</th>
+              <th scope="col">Fecha de nacimiento</th>
+              <th scope="col">Fecha de creación</th>
+              <th scope="col">Opciones</th>
+            </tr>
+          </thead>
+          <tbody id='bodyTable'>
+            <tr *ngFor="let item of listaUsuarios| async" id = "tr-{{item.id}}">
+              <th scope="row">{{item.id}}</th>
+              <td>{{item.cedula}}</td>
+              <td>{{item.nombre}}</td>
+              <td>{{item.creditos}}</td>
+              <td>{{item.fechaNacimiento | date}}</td>
+              <td>{{item.fechaCreacion | date}}</td>
+              <td>
+                <button data-bs-toggle="tooltip" data-bs-placement="top" title="Actualizar" class="btn btn-primary" [routerLink]="['/usuario/crear']" [queryParams]="{ id: item.id}" ><i class="fas fa-user-edit"></i></button>
+                <button data-bs-toggle="tooltip" data-bs-placement="top" title="Eliminar" class="btn btn-danger mx-1" (click)="eliminar(item.id)"><i class="fas fa-user-minus"></i></button>
+                <button data-bs-toggle="tooltip" data-bs-placement="top" title="Ver inscripciones" class="btn btn-warning text-white" [routerLink]="['/inscripcion/listar']" [queryParams]="{ id: item.id}" ><i class="far fa-eye"></i></button>
+                <button data-bs-toggle="tooltip" data-bs-placement="top" title="Ceder Creditos" class="btn btn-info text-white mx-1" [routerLink]="['/usuario/ceder']" [queryParams]="{ id: item.id}" ><i class="fas fa-coins"></i></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+

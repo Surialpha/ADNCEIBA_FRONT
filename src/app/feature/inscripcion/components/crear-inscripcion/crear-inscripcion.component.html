@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="card">
+    <div class="card-header bg-dark text-white">
+      {{formulario}} inscripción
+    </div>
+    <div class="card-body">
+
+      <form class="row" [formGroup]="inscripcionForm" (ngSubmit)="form_Cre_Act()">
+        <input type="hidden" formControlName="fechaInscripcion">
+        <div class="form-floating mb-1 col-6">
+          <label for="floatingInput" >Usuario</label>
+          <select class="form-select form-control" formControlName="usuario">
+            <option class="usuario_option" *ngFor="let user of this.listaUsuarios | async" value="{{user.id}}" >{{user.cedula}} - {{user.nombre}}</option>
+          </select>
+          <div *ngIf="this.inscripcionForm.controls['usuario'].errors">
+            <p *ngIf="this.inscripcionForm.controls['usuario'].errors?.required" class="text-danger fs-6">El usuario es requerido</p>
+          </div>
+        </div>
+
+        <div class="form-floating mb-1 col-6">
+          <label>Curso</label>
+          <select class="form-select form-control" (change) = "setValor()" formControlName="curso">
+            <option value="1" >Matemáticas</option>
+            <option value="2" >Cocina</option>
+            <option value="3" >Lectura</option>
+          </select>
+        </div>
+
+        <div class="form-floating mb-1 col">
+          <label for="basic-url" class="form-label">Valor</label>
+          <input type="number" class="form-control" readonly aria-label="valor" formControlName="valor">
+
+        </div>
+
+        <div class="col-12 mt-2">
+          <button type="submit" id="guardarInscripcion" [disabled]="this.inscripcionForm.invalid" class="btn btn-primary">Inscribir <i class="fas fa-book"></i></button>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+</div>
